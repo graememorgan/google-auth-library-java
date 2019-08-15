@@ -35,6 +35,7 @@ import com.google.common.base.MoreObjects;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.annotation.Nullable;
 
 /** Represents a temporary OAuth2 access token and its expiration information. */
 public class AccessToken implements Serializable {
@@ -48,7 +49,7 @@ public class AccessToken implements Serializable {
    * @param tokenValue String representation of the access token.
    * @param expirationTime Time when access token will expire.
    */
-  public AccessToken(String tokenValue, Date expirationTime) {
+  public AccessToken(String tokenValue, @Nullable Date expirationTime) {
     this.tokenValue = tokenValue;
     this.expirationTimeMillis = (expirationTime == null) ? null : expirationTime.getTime();
   }
@@ -67,6 +68,7 @@ public class AccessToken implements Serializable {
    *
    * @return The expiration time as a {@link Date}.
    */
+  @Nullable
   public Date getExpirationTime() {
     if (expirationTimeMillis == null) {
       return null;
@@ -74,6 +76,7 @@ public class AccessToken implements Serializable {
     return new Date(expirationTimeMillis);
   }
 
+  @Nullable
   Long getExpirationTimeMillis() {
     return expirationTimeMillis;
   }
